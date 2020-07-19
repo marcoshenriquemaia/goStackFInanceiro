@@ -14,7 +14,6 @@
       "name": "Debug",
       "skipFiles": ["<node_internals>/**"],
       "outFiles": ["${workspaceFolder}/**/*.js"],
-      "port": 12345,
     }
   ]
 }

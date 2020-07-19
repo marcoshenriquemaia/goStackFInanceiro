@@ -15,11 +15,16 @@ class CreateTransactionService {
   }
 
   public execute({ title, value, type }: TransitionsDTO): Transaction {
+    const transactionBalance = this.transactionsRepository.getBalance();
+
     const transaction = this.transactionsRepository.create({
       title,
       value,
       type,
     });
+
+    if (transactionBalance.total < value && type === 'outcome')
+      throw { message: 'there is not enough money for withdrawal' };
 
     return transaction;
   }

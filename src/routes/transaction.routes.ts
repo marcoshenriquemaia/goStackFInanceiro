@@ -11,9 +11,11 @@ transactionRouter.get('/', (request, response) => {
   try {
     const transactionList = transactionsRepository.all();
 
-    console.log(transactionList);
+    const balance = transactionsRepository.getBalance();
 
-    return response.status(200).json(transactionList);
+    return response
+      .status(200)
+      .json({ transactions: transactionList, balance });
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }
@@ -31,6 +33,7 @@ transactionRouter.post('/', (request, response) => {
 
     return response.json(transaction);
   } catch (err) {
+    console.log(err);
     return response.status(400).json({ error: err.message });
   }
 });
